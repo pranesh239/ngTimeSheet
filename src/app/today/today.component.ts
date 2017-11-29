@@ -41,7 +41,6 @@ export class TodayComponent implements OnInit {
       }
     }
 
-
   //  REMAINING TIME CALC
    remainingTime()
    {

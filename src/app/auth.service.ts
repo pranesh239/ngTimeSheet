@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,13 +9,27 @@ import 'rxjs/add/operator/switchMap';
 export class AuthService {
 
   user$: Observable<firebase.User>;
-  constructor(private afAuth: AngularFireAuth, private user: UserService) {
+  redirectPath;
+  constructor(private afAuth: AngularFireAuth, private user: UserService, private route:Router, private path: ActivatedRoute) {
     this.user$ = afAuth.authState;
+    console.log(afAuth.authState);
    }
 
   login()
   {
+      this.redirectPath=this.path.snapshot.queryParamMap.get('redirectURL') || '';
+      localStorage.setItem('redirect',this.redirectPath);
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  }
+
+  logout()
+  {
+    this.afAuth.auth.signOut()
+      .then(() => {
+        console.log(' signed out');
+      this.route.navigate(['/login']);
+    })
+    
   }
 
   get userData$()
@@ -23,7 +38,7 @@ export class AuthService {
       if(data) return this.user.getData(data.uid)
 
       else return Observable.of(null);
-   
+    
     })
   }
 

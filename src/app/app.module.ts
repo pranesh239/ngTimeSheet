@@ -1,3 +1,4 @@
+import { SecurityGuard } from './security-guard.service';
 import { TimeCalcService } from './time-calc.service';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
@@ -36,7 +37,7 @@ import { LoginComponent } from './login/login.component';
 const route:Routes =[
   {
     path: '', 
-    redirectTo: '/login', 
+    redirectTo: '/today', 
     pathMatch: 'full' 
   },
   {
@@ -45,15 +46,19 @@ const route:Routes =[
   },
   {
     path:'today',
-    component:TodayComponent
+    component:TodayComponent,
+    canActivate:[SecurityGuard]
   },
   {
     path:'thisweek',
-    component:ThisWeekComponent
+    component:ThisWeekComponent,
+    canActivate:[SecurityGuard]
+
   },
   {
     path:'admin',
-    component:AdminComponent
+    component:AdminComponent,
+    canActivate:[SecurityGuard]
   },
   {
     path:'**',
@@ -94,7 +99,8 @@ const route:Routes =[
   providers: [
     AuthService,
     UserService,
-    TimeCalcService
+    TimeCalcService,
+    SecurityGuard
   ],
   bootstrap: [AppComponent]
 })
