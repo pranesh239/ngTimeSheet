@@ -1,0 +1,55 @@
+
+<div class="row">
+    <div class="col-xl-12 mt-3">
+        <!-- CARD LAYOUT -->
+        <mat-card>
+                <mat-spinner *ngIf="!userDetails"></mat-spinner>
+                <mat-card-header *ngIf="userDetails">
+                        <div mat-card-avatar [style.backgroundImage]="'url('+userDetails.photoURL+')'" class="cardAvatar"></div>
+                        <mat-card-title>{{userDetails.name}}</mat-card-title>        
+                        <mat-card-subtitle>{{userDetails.email}}</mat-card-subtitle>
+                      </mat-card-header>
+                
+                  
+        </mat-card>
+        <!-- /CARD LAYOUT -->
+        <button class="mt-3" mat-raised-button color='primary' (click)="log()">CHECK IN</button>
+        <!-- CARD LAYOUT -->
+        <section class="todayLogin mt-3">
+            <div class="row">
+
+            
+                <div class="col-lg-4" *ngIf="checkInTime">
+                        
+                         <mat-chip-list class="mat-chip-list-stacked">
+                             <mat-chip selected="true" color="accent">
+                              {{checkInTime}}
+                             </mat-chip>
+                           </mat-chip-list>
+                          
+                     </div>
+                     <div class="col-lg-4" *ngIf="checkOutCalc">
+                     
+                      <mat-chip-list class="mat-chip-list-stacked">
+                          <mat-chip selected="true" color="primary">
+                           {{checkOutCalc}}
+                          </mat-chip>
+                        </mat-chip-list>
+                       
+                     </div>
+                    <div class="col-lg-4" *ngIf="checkOutCalc">
+                     
+                      <mat-chip-list class="mat-chip-list-stacked">
+                          <mat-chip selected="true" color="primary">
+                           Remaining time - {{durationHours}}
+                          </mat-chip>
+                        </mat-chip-list>
+                       
+                    </div>
+                </div>
+        </section>
+       
+        <!-- / CARD LAYOUT -->
+
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.jumbotron
+{
+    background:url('../../assets/images/jumbotron.png');
+    height:250px;
+    background-size: cover;
+    margin: 0 -15px;
+    border-radius: 0px;
+    position: relative;
+    background-position: center center;
+}
+.jumbotron> button
+{
+    position: absolute;
+    left:8px;
+    bottom:8px;
+
+}
