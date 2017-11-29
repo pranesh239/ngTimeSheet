@@ -15,7 +15,10 @@ export class UserService {
       name:user.displayName,
       email:user.email,
       photoURL:user.photoURL
-    })
+    }).then(() => {
+      localStorage.currentUser=user.uid;
+    });
+    
   }
 
   getData(uid): Observable<AppUser>

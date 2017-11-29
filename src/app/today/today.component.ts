@@ -1,3 +1,4 @@
+import { TimeCalcService } from './../time-calc.service';
 import { AppUser } from './../module/appUser';
 import { AuthService } from './../auth.service';
 import { UserService } from './../user.service';
@@ -13,12 +14,16 @@ export class TodayComponent implements OnInit {
   checkInTime:string;
   checkOutCalc:string;
   durationHours;
-  constructor(private auth:AuthService) {
+  todaysDuration;
+  constructor(private auth:AuthService, private timeService:TimeCalcService) {
    this.auth.userData$.subscribe(data => {
      this.userDetails = data;
    });
 
-    if(localStorage.today)
+   this.todaysDuration = this.timeService.getTodaysData();
+  //  console.log(this.todaysDuration);
+
+  if(localStorage.today)
       {
         this.checkInTime = moment(localStorage.today).format('LLLL');
         this.checkOutCalc = moment(localStorage.todayCalc).format('LLLL');
@@ -29,14 +34,15 @@ export class TodayComponent implements OnInit {
   //  LOGGING
    log()
    {
-      let now = moment();
-      
+      var now = moment();
+      this.timeService.updateCheckIn(now.toString());
       if(!localStorage.today)
       {
         localStorage.today = now;
         localStorage.todayCalc = now.add(9,'hours');
         this.checkInTime = moment(localStorage.today).format('LLLL');
         this.checkOutCalc = moment(localStorage.todayCalc).format('LLLL');
+        
         this.ngOnInit();
       }
     }
@@ -51,6 +57,10 @@ export class TodayComponent implements OnInit {
 
   //  RUNNER TIME
    ngOnInit() {
+
+
+
+
      if(localStorage.today)
      {
        setInterval(() =>{
