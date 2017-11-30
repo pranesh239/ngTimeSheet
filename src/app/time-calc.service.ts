@@ -22,9 +22,9 @@ export class TimeCalcService {
     let userLogData;
     this.db.object('users/'+currentUser+"/today").valueChanges().subscribe(data => {
       userLogData = data;
-      // console.log(userLogData);
+      console.log(userLogData);
     });
     return userLogData;
-  }
+  }1
 
 }

@@ -1,9 +1,12 @@
 
 <div class="row">
-    <div class="col-xl-12 mt-3">
+    <div class="spinHolder">
+            <mat-spinner *ngIf="!userDetails"></mat-spinner>
+    </div>
+    <div class="col-xl-12 mt-3" *ngIf="userDetails">
         <!-- CARD LAYOUT -->
         <mat-card>
-                <mat-spinner *ngIf="!userDetails"></mat-spinner>
+                
                 <mat-card-header *ngIf="userDetails">
                         <div mat-card-avatar [style.backgroundImage]="'url('+userDetails.photoURL+')'" class="cardAvatar"></div>
                         <mat-card-title>{{userDetails.name}}</mat-card-title>        
@@ -13,18 +16,20 @@
                   
         </mat-card>
         <!-- /CARD LAYOUT -->
+        <button class="mt-3" mat-raised-button color='primary' (click)="showLogs()" >Show Log</button>
         <button class="mt-3" mat-raised-button color='primary' (click)="log()">CHECK IN</button>
-        <button class="mt-3" mat-raised-button color='primary'>CHECK OUT</button>
+        <button class="mt-3" mat-raised-button color='accent'>CHECK OUT</button>
         <!-- CARD LAYOUT -->
         <section class="todayLogin mt-3">
-            <div class="row">
+            <div class="row" *ngIf="checkInTime">
 
             
                 <div class="col-lg-4" *ngIf="checkInTime">
                         
                          <mat-chip-list class="mat-chip-list-stacked">
                              <mat-chip selected="true" color="accent">
-                              {{checkInTime}}
+                                    <span class="h6">{{checkInTime}}</span>
+                              
                              </mat-chip>
                            </mat-chip-list>
                           
@@ -33,16 +38,17 @@
                      
                       <mat-chip-list class="mat-chip-list-stacked">
                           <mat-chip selected="true" color="primary">
-                           {{checkOutCalc}}
+                                <span class="h6">{{checkOutCalc}}</span>
+                           
                           </mat-chip>
                         </mat-chip-list>
                        
                      </div>
-                    <div class="col-lg-4" *ngIf="checkOutCalc">
-                     
-                      <mat-chip-list class="mat-chip-list-stacked">
+                    <div class="col-lg-4" >
+                            <mat-spinner *ngIf="!durationHours"></mat-spinner>
+                      <mat-chip-list *ngIf="durationHours" class="mat-chip-list-stacked">
                           <mat-chip selected="true" color="primary">
-                           Remaining time - {{durationHours}}
+                           <span class="display-4">{{durationHours}}</span> 
                           </mat-chip>
                         </mat-chip-list>
                        
@@ -54,3 +60,6 @@
 
     </div>
 </div>
+<pre>
+    {{todaysDuration | json}}
+</pre>

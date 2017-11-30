@@ -26,8 +26,10 @@ export class AuthService {
   {
     this.afAuth.auth.signOut()
       .then(() => {
-        console.log(' signed out');
-      this.route.navigate(['/login']);
+        localStorage.removeItem('today');
+        localStorage.removeItem('todayCalc');
+        localStorage.removeItem('currentUser');
+        this.route.navigate(['/login']);
     })
     
   }
