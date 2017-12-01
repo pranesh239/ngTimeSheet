@@ -40,6 +40,15 @@ export class TodayComponent implements OnInit {
       this.showLogs();
     }
 
+    // checkOut
+    checkOut()
+    {
+      console.log('checkout');
+       var now = moment();
+       this.timeService.updateCheckOut(now.toString());
+       this.showLogs();
+     }
+
   //  REMAINING TIME CALC
    remainingTime()
    {

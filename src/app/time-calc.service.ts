@@ -11,8 +11,19 @@ export class TimeCalcService {
     let currentUser = localStorage.currentUser;
     this.db.object('users/'+currentUser).update({
         today:{
-          in:checkInMoment
+          in:checkInMoment,
+          out:''
         }
+      });
+  }
+
+
+  updateCheckOut(checkOutMoment)
+  {
+    let currentUser = localStorage.currentUser;
+    this.db.object('users/'+currentUser+'/today/').update({
+        in:localStorage.today,
+        out:checkOutMoment
       });
   }
 
