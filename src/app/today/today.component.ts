@@ -18,7 +18,7 @@ export class TodayComponent implements OnInit {
   checkOutCalc:string;
   durationHours;
   userLogData;
-  showCheckIn:boolean=true;
+  showFlag:boolean=false;
 
   
   constructor(private auth:AuthService, private timeService:TimeCalcService, private db:AngularFireDatabase) {
@@ -36,7 +36,7 @@ export class TodayComponent implements OnInit {
    {
       var now = moment();
       this.timeService.updateCheckIn(now.toString());
-      this.showCheckIn=false;
+      this.showFlag=true;
       this.showLogs();
     }
 
@@ -59,7 +59,7 @@ export class TodayComponent implements OnInit {
    allocation()
    {
       this.checkInClacAllot(localStorage.today,localStorage.todayCalc);
-      this.showCheckIn=false;
+      this.showFlag=true;
       if(localStorage.today)
       {
         setInterval(() =>{
@@ -76,6 +76,7 @@ export class TodayComponent implements OnInit {
 
    showLogs()
    {
+    this.showFlag=true;
         if(!localStorage.today)
         {
             let currentUser = localStorage.currentUser;
