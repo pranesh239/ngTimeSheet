@@ -28,6 +28,7 @@ export class TodayComponent implements OnInit {
 
         console.log('constructor');
 
+        localStorage.dayNo = moment().isoWeekday();
         
    }
 
@@ -35,7 +36,7 @@ export class TodayComponent implements OnInit {
    log()
    {
       var now = moment();
-      this.timeService.updateCheckIn(now.toString());
+      this.timeService.updateCheckIn(now.toString(),localStorage.dayNo);
       this.showFlag=true;
       this.showLogs();
     }
@@ -45,7 +46,7 @@ export class TodayComponent implements OnInit {
     {
       console.log('checkout');
        var now = moment();
-       this.timeService.updateCheckOut(now.toString());
+       this.timeService.updateCheckOut(now.toString(), localStorage.dayNo);
        this.showLogs();
      }
 
@@ -76,11 +77,11 @@ export class TodayComponent implements OnInit {
 
    showLogs()
    {
-    this.showFlag=true;
+    
         if(!localStorage.today)
         {
             let currentUser = localStorage.currentUser;
-            this.db.object('users/'+currentUser+"/today/in").valueChanges().take(1).subscribe(data => 
+            this.db.object('users/'+currentUser+"/week/"+localStorage.dayNo+"/in/").valueChanges().take(1).subscribe(data => 
               {
                     this.userLogData = data;
                     localStorage.today = moment('"'+this.userLogData+'"');

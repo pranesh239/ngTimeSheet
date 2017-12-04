@@ -1,4 +1,7 @@
+import { TimeCalcService } from './../time-calc.service';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-this-week',
@@ -7,9 +10,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThisWeekComponent implements OnInit {
 
-  constructor() { }
+  weekData;
+  constructor(private timeService:TimeCalcService) {
+      this.timeService.getThisWeekData().subscribe(data => this.weekData = data);
+      // console.log(this.timeService.getThisWeekData());
+   }
 
-  ngOnInit() {
+   ngOnInit() {
   }
+
+   convertion(momentVal)
+   {
+      return moment('"'+momentVal+'"').format('LTS');
+   }
+
+   getDay(time)
+   {
+     return moment(time).format('dddd');
+   }
+
+   getEstimatedTime(momentData)
+   {
+     console.log(moment('"'+momentData+'"').add(9,'hours'));
+     return moment('"'+momentData+'"').add(9,'hours');
+   }
+
+   differenceHours(inTime,outTime)
+   {
+     return moment.duration(moment(outTime).diff(moment(inTime))).humanize();
+   }
+
 
 }

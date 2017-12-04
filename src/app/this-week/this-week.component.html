@@ -1,3 +1,16 @@
-<p>
-  this-week works!
-</p>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Day</th>
+      <th scope="col">Check In Time</th>
+      <th scope="col">Check Out Time</th>
+      <th scope="col">Work hours</th>
+    </tr>
+    <tr *ngFor="let week of weekData">
+      <td >{{getDay(week.key)}}</td>
+      <td >{{convertion(week.in)}}</td>
+      <td >{{convertion(week.out)}}</td>
+      <td >{{differenceHours(week.in,week.out)}}</td>
+    </tr>
+  </thead>
+</table>
