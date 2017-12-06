@@ -26,7 +26,7 @@ export class ThisWeekComponent implements OnInit {
 
    getDay(time)
    {
-     return moment(time).format('dddd');
+     return moment('"'+time+'"').format("dddd");
    }
 
    getEstimatedTime(momentData)
@@ -37,7 +37,7 @@ export class ThisWeekComponent implements OnInit {
 
    differenceHours(inTime,outTime)
    {
-     return moment.duration(moment(outTime).diff(moment(inTime))).humanize();
+     return moment.utc(moment(outTime).diff(moment(inTime))).format('HH:mm:ss');
    }
 
 
