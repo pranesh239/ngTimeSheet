@@ -10,10 +10,24 @@ export class TimeCalcService {
   updateCheckIn(checkInMoment, day)
   {
     let currentUser = localStorage.currentUser;
-    this.db.object('users/'+currentUser+"/week/"+day).update({
+    if(day===1)
+    {
+      this.db.object('users/'+currentUser+"/week/").update({
+        day:{
           in:checkInMoment,
           out:''
-      });
+        }
+        
+    });
+    }
+    else
+    {
+      this.db.object('users/'+currentUser+"/week/"+day).update({
+        in:checkInMoment,
+        out:''
+    });
+    }
+    
   }
 
 

@@ -7,7 +7,7 @@
       <th scope="col">Work hours</th>
     </tr>
     <tr *ngFor="let week of weekData">
-      <td >{{getDay(week.key)}}</td>
+      <td >{{getDay(week.in)}}</td>
       <td >{{convertion(week.in)}}</td>
       <td >{{convertion(week.out)}}</td>
       <td >{{differenceHours(week.in,week.out)}}</td>

@@ -26,7 +26,7 @@ export class ThisWeekComponent implements OnInit {
 
    getDay(time)
    {
-     return moment('"'+time+'"').format("dddd");
+     return moment(time).format("dddd");
    }
 
    getEstimatedTime(momentData)

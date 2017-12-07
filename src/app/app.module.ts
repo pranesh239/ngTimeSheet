@@ -1,3 +1,4 @@
+import { AdminAuthService } from './admin-auth.service';
 import { SecurityGuard } from './security-guard.service';
 import { TimeCalcService } from './time-calc.service';
 import { UserService } from './user.service';
@@ -52,13 +53,13 @@ const route:Routes =[
   {
     path:'thisweek',
     component:ThisWeekComponent,
-    canActivate:[SecurityGuard]
+    canActivate:[SecurityGuard, AdminAuthService]
 
   },
   {
     path:'admin',
     component:AdminComponent,
-    canActivate:[SecurityGuard]
+    canActivate:[SecurityGuard, AdminAuthService]
   },
   {
     path:'**',
@@ -100,7 +101,8 @@ const route:Routes =[
     AuthService,
     UserService,
     TimeCalcService,
-    SecurityGuard
+    SecurityGuard,
+    AdminAuthService
   ],
   bootstrap: [AppComponent]
 })

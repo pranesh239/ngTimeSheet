@@ -29,6 +29,8 @@ export class TodayComponent implements OnInit {
         console.log('constructor');
 
         localStorage.dayNo = moment().isoWeekday();
+
+        // timeService.updateCheckIn(moment(),1);
         
    }
 

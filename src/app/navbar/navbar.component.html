@@ -11,11 +11,11 @@
               <mat-icon>today</mat-icon>
               <span>Today</span>
           </button>
-          <button mat-menu-item routerLink="/thisweek">
+          <button mat-menu-item routerLink="/thisweek" *ngIf="isAdmin | async">
             <mat-icon>poll</mat-icon>
             <span>This Week</span>
         </button>
-          <button mat-menu-item routerLink="/admin">
+          <button mat-menu-item routerLink="/admin" *ngIf="isAdmin | async">
               <mat-icon>verified_user</mat-icon>
               <span>Admin</span>
           </button>
